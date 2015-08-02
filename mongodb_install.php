@@ -2,7 +2,9 @@
 
 /**
  * @file
- * Install file for MongoDB module.
+ * MongoDB actual install file.
+ *
+ * @see mongodb.install
  */
 
 /**
