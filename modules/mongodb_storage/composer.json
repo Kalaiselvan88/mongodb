@@ -1,0 +1,16 @@
+{
+  "description": "MongoDB Storage",
+  "homepage": "https://www.drupal.org/project/mongodb_storage",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev",
+  "name": "drupal/mongodb_storage",
+  "require": {
+    "drupal/mongodb": "^2.0.0-dev"
+  },
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/mongodb_storage",
+    "source": "http://cgit.drupalcode.org/mongodb_storage"
+  },
+  "type": "drupal-module"
+}

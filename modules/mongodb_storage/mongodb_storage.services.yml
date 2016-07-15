@@ -18,3 +18,7 @@ services:
   keyvalue.mongodb:
     arguments: ['@mongodb.database_factory']
     class: 'Drupal\mongodb_storage\KeyValueFactory'
+  mongodb_storage.query:
+    class: Drupal\mongodb_storage\Model\QueryFactory
+    arguments: ['@entity.manager', '@settings']
+
