@@ -43,6 +43,7 @@ class EventTemplateConverter implements ParamConverterInterface {
    * {@inheritdoc}
    */
   public function convert($value, $definition, $name, array $defaults) {
+    ksm(__METHOD__, $value, $definition, $name, $defaults);
     if (!is_string($value)) {
       $this->logger->notice('Non-string event template id: %id', ['%id' => var_export($value, TRUE)]);
       return NULL;
