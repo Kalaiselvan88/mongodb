@@ -409,3 +409,24 @@ function template_preprocess_block(&$variables) {
   // Create a valid HTML ID and make sure it is unique.
   $variables['block_html_id'] = drupal_html_id('block-' . $variables['block']->module . '-' . $variables['block']->delta);
 }
+
+/**
+ * Implements hook_themes_enabled().
+ */
+function mongodb_block_themes_enabled($theme_list) {
+  mongodb_block_add_indexes($theme_list);
+}
+
+/**
+ * Create indexes for mongo blocks.
+ *
+ * @param $theme_list
+ *   Array of themes to create indexes for.
+ */
+function mongodb_block_add_indexes($theme_list) {
+  // Create indexes
+  foreach ($theme_list as $theme) {
+    mongodb_collection('block', $theme)->ensureIndex(array('_id.module' => 1, '_id.delta' => 1));
+    mongodb_collection('block_customized', $theme)->ensureIndex(array('_id.module' => 1, '_id.delta' => 1));
+  }
+}
