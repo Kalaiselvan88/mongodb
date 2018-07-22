@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Installation - MongoDB for Drupal</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installation";
+    var mkdocs_page_input_path = "install.md";
+    var mkdocs_page_url = "/install/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> MongoDB for Drupal</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="..">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Installation</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#installation-and-settings">Installation and Settings</a></li>
+                
+                    <li><a class="toctree-l4" href="#prerequisites">Prerequisites</a></li>
+                
+                    <li><a class="toctree-l4" href="#settings-configuration">Settings Configuration</a></li>
+                
+                    <li><a class="toctree-l4" href="#installation">Installation</a></li>
+                
+            
+            </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Modules</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../modules/mongodb/">Driver: `mongodb`</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../modules/mongodb_storage/">Key-value: `mongodb_storage`</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../modules/mongodb_watchdog/">Logger: `mongodb_watchdog`</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Development</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../bespoke/">Bespoke code</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../tests/">Tests</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">MongoDB for Drupal</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Installation</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/FGM/mongodb/edit/master/docs/install.md"
+          class="icon icon-github"> Edit on GitHub</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="installation-and-settings">Installation and Settings</h1>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>The MongoDB module and sub-modules need some configuration to be useful. This
+guide assumes that :</p>
+<ul>
+<li>a <a href="https://www.mongodb.org/downloads">MongoDB</a> 3.0 to 4.0 server instance is already installed, configured, and
+  available to connect to from the Drupal instance.</li>
+<li>the site will be running <a href="https://www.drupal.org/project/drupal">Drupal</a> 8.[56].x, with <a href="https://www.drupal.org/project/drush">Drush</a> 8.x.</li>
+<li>the <a href="http://php.net/mongodb">mongodb</a> (not <a href="http://php.net/mongo">mongo</a>) PHP extension version 1.1.7 or
+  later is installed and configured.</li>
+<li>PHP is version 7.[01].x. At this point, <a href="https://www.drupal.org/node/2936045">PHP 7.2.x</a> might not pass the
+  test suite. It should be compatible by the time Drupal 8.6.0 is released.</li>
+</ul>
+<p><strong>NOTE</strong> : There is a plan to support Drush 9.x and it can be tracked <a href="https://www.drupal.org/project/mongodb/issues/2986785">here</a></p>
+<p>In a nutshell, any MongoDB server &gt;=3.6, PHP extension &gt;= 1.3.4, MongoDB PHP library &gt;= 1.2.0 and PHP version &gt;= 7.1. We recommend using composer for installing this module. For details refer <a href="#composer-requirements">below</a>.</p>
+<p>For more details about MongoDB extension and library for PHP check <a href="http://php.net/mongodb">here</a></p>
+<p>Some more links for you:</p>
+<ul>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">MongoDB Mac installation</a></li>
+<li><a href="https://docs.mongodb.com/manual/administration/install-on-linux/">MongoDB LINUX installation</a></li>
+<li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">MongoDB Windows installation</a></li>
+</ul>
+<p>If MongoDB 3.0 to 4.0 is installed on <code>localhost:27017</code> and <code>mongod</code> was started
+with the <code>–httpinterface</code> option, you may view the web admin interface:</p>
+<pre><code>http://localhost:28017/
+</code></pre>
+<h2 id="settings-configuration">Settings Configuration</h2>
+<ul>
+<li>Download the module package, as per
+  <a href="https://www.drupal.org/documentation/install/modules-themes/modules-8">Installing contributed modules (Drupal 8)</a></li>
+<li>Copy the relevant section from the <code>mongodb/example.settings.local.php</code> to
+  your <code>settings.local.php</code> file if you use one, or <code>settings.php</code> otherwise,
+  and adapt it to match your MongoDB settings. These settings are used by the
+  <code>mongodb</code> module to connect to your MongoDB servers, with the <code>default</code> server
+   being the one started in previous steps.</li>
+<li>The <code>clients</code> key contains an associative array of connection by
+    connection alias, with the default connection parameters being under the
+    <code>default</code> key, and additional keys allowing the use of other
+    servers/clusters.</li>
+<li>The <code>databases</code> key contains an associative array of server/database pairs
+    by database alias, with the default Drupal database being under the
+    <code>default</code> key, and additional keys allowing modules to use their own
+    database to avoid stepping on each other's toes. This is especially useful
+    for bespoke modules created for the needs of a specific site, which can thus
+    use their own databases, possibly located on other MongoDB clusters.
+    For example, with the following settings:</li>
+</ul>
+<pre><code class="php">// In sites/default/settings.local.php.
+$settings['mongodb'] = [
+  'clients' =&gt; [
+    // Client alias =&gt; connection constructor parameters.
+    'default' =&gt; [
+      'uri' =&gt; 'mongodb://localhost:27017',
+      'uriOptions' =&gt; [],
+      'driverOptions' =&gt; [],
+    ],
+  ],
+  'databases' =&gt; [
+    // Database alias =&gt; [ client_alias, database_name ]
+    'default' =&gt; ['default', 'drupal'],
+    'keyvalue' =&gt; ['default', 'keyvalue'],
+    'logger' =&gt; ['default', 'logger'],
+  ],
+];
+</code></pre>
+
+<ul>
+<li>With these settings:<ul>
+<li>the <code>default</code> database alias will handle collections in the <code>drupal</code>
+  database on the <code>default</code> MongoDB server installed in earlier steps</li>
+<li>the <code>keyvalue</code> database alias will store key-value collections on the
+  same <code>default</code> MongoDB server, but in a separate <code>keyvalue</code> database.</li>
+<li>the <code>logger</code> database alias will store logger collections on the same
+  <code>default</code> MongoDB server, but in a separate <code>logger</code> database.</li>
+</ul>
+</li>
+<li>To use the MongoDB Key-Value (Expirable) storage:<ul>
+<li>ensure there is a <code>keyvalue</code> database alias in <code>settings.local.php</code>, like
+in the previous lines.</li>
+<li>declare MongoDB as the default keyvalue storage implementation by editing
+the existing declarations in the <code>sites/default/services.yml</code> file:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="yaml"># In sites/default/services.yml.
+factory.keyvalue:
+  default: keyvalue.mongodb
+factory.keyvalue.expirable:
+  keyvalue_expirable_default: keyvalue.expirable.mongodb
+</code></pre>
+
+<h2 id="installation">Installation</h2>
+<ul>
+<li>Enable the <code>mongodb_storage</code> module, e.g. using <code>drush en mongodb_storage</code>.</li>
+<li>Import the existing Key-Value contents from the database, using the Drush
+    <code>mongodb_storage-import-keyvalue</code> command: <code>drush most-ikv</code>. It will output
+    the list of imported keys, for your information, like:</li>
+</ul>
+<pre><code class="yaml">key_value
+  config.entity.key_store.action
+    uuid:054e62b3-1c40-4f22-aa17-c092bd796ee8
+    uuid:0cfd15f5-c01a-4912-991c-ad10e934f86e
+(...lots of line, then...)
+key_value_expire
+  update_available_releases
+    drupal
+</code></pre>
+
+<ul>
+<li>rebuild the container to take these changes into account using <code>drush cr</code>.</li>
+</ul>
+<p>Once the module is installed and enabled, you can check its requirements on
+<code>/admin/reports/status</code>:</p>
+<p><img alt="MongoDB on status page" src="../images/mongodb-requirements.png" /></p>
+<h3 id="composer-requirements">Composer Requirements</h3>
+<ul>
+<li>
+<p>This section is applicable if you are using composer already in your site to
+  manage module dependencies. Know more about composer <a href="https://www.drupal.org/docs/develop/using-composer/using-composer-to-manage-drupal-site-dependencies">here</a>.</p>
+</li>
+<li>
+<p>At the root of your site</p>
+<ul>
+<li>
+<p>If you are using the <code>drupal-composer/drupal-project</code> skeleton, just add
+  this package:</p>
+<p><code>composer require drupal/mongodb "^2.0.0"</code></p>
+</li>
+<li>
+<p>Otherwise also add a composer requirement by typing:</p>
+<p><code>composer require drupal/mongodb "^2.0.0"</code>
+<code>composer require mongodb/mongodb "^1.2.0"</code></p>
+</li>
+<li>
+<p>If this is the first Composer dependency on the project, run:</p>
+<p><code>composer install</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Enable the <code>mongodb</code> module. You now have access to the MongoDB services and
+  Drush commands for the <code>mongodb</code> module.</p>
+</li>
+</ul>
+<p>Note that there is currently a bug with Composer-based deployment from packages.drupal.org/8 : <a href="https://www.drupal.org/project/project_composer/issues/2985860">#2985860: packages.drupal.org/8 serves incorrect composer.json for module mongodb</a>. The workaround is:</p>
+<ul>
+<li>Either require mongodb/mongodb directly in the root composer.json of the project</li>
+<li>Add a repositories entry with <code>"type": "vcs"</code> and <code>"url": "https://github.com/fgm/mongodb.git"</code> in the root <code>composer.json</code>, and require the <code>"drupal/mongodb":"dev-8.x-2.x"</code> instead of the d.o.-rewritten format for semantic versioning <code>"drupal/mongodb":"^2.0"</code></li>
+</ul>
+<p>Once this issue is fixed, these workarounds will no longer be necessary.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../modules/mongodb/" class="btn btn-neutral float-right" title="Driver: `mongodb`">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/FGM/mongodb" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../modules/mongodb/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>
