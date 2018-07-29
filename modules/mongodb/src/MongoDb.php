@@ -19,7 +19,11 @@ class MongoDb {
   const MODULE = 'mongodb';
 
   const SERVICE_COMMANDS = 'drupal.mongodb.commands';
+  const SERVICE_CLIENT_FACTORY = 'mongodb.client_factory';
   const SERVICE_DB_FACTORY = 'mongodb.database_factory';
+
+  // A frequent projection to just request the document ID.
+  const ID_PROJECTION = ['projection' => ['_id' => 1]];
 
   protected static $libraryVersion;
 
