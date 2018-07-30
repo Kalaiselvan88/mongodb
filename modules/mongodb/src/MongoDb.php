@@ -5,6 +5,7 @@ namespace Drupal\mongodb;
 // @codingStandardsIgnoreLine
 use Drupal\mongodb\Commands\MongoDbCommands;
 use MongoDB\Collection;
+use MongoDB\Exception\UnexpectedValueException;
 
 /**
  * Class MongoDb contains constants usable by all modules using the driver.
@@ -25,6 +26,11 @@ class MongoDb {
   // A frequent projection to just request the document ID.
   const ID_PROJECTION = ['projection' => ['_id' => 1]];
 
+  /**
+   * The MongoDB library "API version", a reduced version of the actual version.
+   *
+   * @var string
+   */
   protected static $libraryVersion;
 
   /**
@@ -85,7 +91,16 @@ class MongoDb {
    */
   public static function countCollection(Collection $collection, array $selector = []) : int {
     if (version_compare(static::libraryApiVersion(), '1.4.0') >= 0) {
-      return $collection->countDocuments($selector);
+      // Work around bug https://jira.mongodb.org/browse/PHPLIB-376 with library
+      // version 1.4.0/1.4.1.
+      try {
+        $count = $collection->countDocuments($selector);
+      }
+      catch (UnexpectedValueException $e) {
+        $count = 0;
+      }
+
+      return $count;
     }
 
     return $collection->count($selector);
