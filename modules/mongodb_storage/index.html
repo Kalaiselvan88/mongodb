@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Key-value: `mongodb_storage` - MongoDB for Drupal</title>
+  <title>Key-value: mongodb_storage - MongoDB for Drupal</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Key-value: `mongodb_storage`";
+    var mkdocs_page_name = "Key-value: mongodb_storage";
     var mkdocs_page_input_path = "modules/mongodb_storage.md";
     var mkdocs_page_url = "/modules/mongodb_storage/";
   </script>
@@ -61,20 +61,27 @@
 <li>
           
             <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../layout/">Layout</a>
+        
+    </li>
+<li>
+          
+            <li>
     <ul class="subnav">
     <li><span>Modules</span></li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../mongodb/">Driver: `mongodb`</a>
+        <a class="" href="../mongodb/">Driver: mongodb</a>
         
     </li>
 
         
             
     <li class="toctree-l1 current">
-        <a class="current" href="./">Key-value: `mongodb_storage`</a>
+        <a class="current" href="./">Key-value: mongodb_storage</a>
         
             <ul>
             
@@ -88,7 +95,7 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../mongodb_watchdog/">Logger: `mongodb_watchdog`</a>
+        <a class="" href="../mongodb_watchdog/">Logger: mongodb_watchdog</a>
         
     </li>
 
@@ -144,7 +151,7 @@
         
       
     
-    <li>Key-value: `mongodb_storage`</li>
+    <li>Key-value: mongodb_storage</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/FGM/mongodb/edit/master/docs/modules/mongodb_storage.md"
@@ -158,7 +165,43 @@
             <div class="section">
               
                 <h1 id="key-value-mongodb_storage">Key-value: <code>mongodb_storage</code></h1>
-<p>@TODO</p>
+<p>The <code>mongodb_storage</code> module implements the <a href="https://en.wikipedia.org/wiki/Key-value_database">key-value storage</a>
+for Drupal in MongoDB.</p>
+<ul>
+<li>To use the MongoDB Key-Value (Expirable) storage:<ul>
+<li>ensure there is a <code>keyvalue</code> database alias as in
+  <a href="../../../install#settings-configuration">settings configuration</a>.</li>
+<li>declare MongoDB as the default keyvalue storage implementation by editing
+  the existing declarations in the <code>sites/default/services.yml</code> file:</li>
+</ul>
+</li>
+</ul>
+<pre><code class="yaml">    # In sites/default/services.yml.
+    factory.keyvalue:
+      default: keyvalue.mongodb
+    factory.keyvalue.expirable:
+      keyvalue_expirable_default: keyvalue.expirable.mongodb
+</code></pre>
+
+<ul>
+<li>enable the module, e.g. using <code>drush en mongodb_storage</code>.</li>
+<li>import the existing Key-Value contents from the database, using the Drush
+  <code>mongodb_storage-import-keyvalue</code>command: <code>drush most-ikv</code>. It will output
+  the list of imported keys, for your information, like:</li>
+</ul>
+<pre><code>    key_value
+      config.entity.key_store.action
+        uuid:054e62b3-1c40-4f22-aa17-c092bd796ee8
+        uuid:0cfd15f5-c01a-4912-991c-ad10e934f86e
+    (...lots of line, then...)
+    key_value_expire
+      update_available_releases
+        drupal
+</code></pre>
+
+<ul>
+<li>rebuild the container to take these changes into account using <code>drush cr</code>.</li>
+</ul>
               
             </div>
           </div>
@@ -166,10 +209,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../mongodb_watchdog/" class="btn btn-neutral float-right" title="Logger: `mongodb_watchdog`">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mongodb_watchdog/" class="btn btn-neutral float-right" title="Logger: mongodb_watchdog">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../mongodb/" class="btn btn-neutral" title="Driver: `mongodb`"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mongodb/" class="btn btn-neutral" title="Driver: mongodb"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,15 @@
     
     <url>
      <loc>/install/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/layout/</loc>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,19 +29,19 @@
         
     <url>
      <loc>/modules/mongodb/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/modules/mongodb_storage/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/modules/mongodb_watchdog/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -43,13 +51,13 @@
         
     <url>
      <loc>/bespoke/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tests/</loc>
-     <lastmod>2018-07-22</lastmod>
+     <lastmod>2018-08-07</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

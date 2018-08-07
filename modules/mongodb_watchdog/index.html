@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Logger: `mongodb_watchdog` - MongoDB for Drupal</title>
+  <title>Logger: mongodb_watchdog - MongoDB for Drupal</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Logger: `mongodb_watchdog`";
+    var mkdocs_page_name = "Logger: mongodb_watchdog";
     var mkdocs_page_input_path = "modules/mongodb_watchdog.md";
     var mkdocs_page_url = "/modules/mongodb_watchdog/";
   </script>
@@ -61,31 +61,40 @@
 <li>
           
             <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../layout/">Layout</a>
+        
+    </li>
+<li>
+          
+            <li>
     <ul class="subnav">
     <li><span>Modules</span></li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../mongodb/">Driver: `mongodb`</a>
+        <a class="" href="../mongodb/">Driver: mongodb</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../mongodb_storage/">Key-value: `mongodb_storage`</a>
+        <a class="" href="../mongodb_storage/">Key-value: mongodb_storage</a>
         
     </li>
 
         
             
     <li class="toctree-l1 current">
-        <a class="current" href="./">Logger: `mongodb_watchdog`</a>
+        <a class="current" href="./">Logger: mongodb_watchdog</a>
         
             <ul>
             
                 <li class="toctree-l3"><a href="#logger-mongodb_watchdog">Logger: mongodb_watchdog</a></li>
+                
+                    <li><a class="toctree-l4" href="#configuration">Configuration</a></li>
                 
             
             </ul>
@@ -144,7 +153,7 @@
         
       
     
-    <li>Logger: `mongodb_watchdog`</li>
+    <li>Logger: mongodb_watchdog</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/FGM/mongodb/edit/master/docs/modules/mongodb_watchdog.md"
@@ -158,49 +167,53 @@
             <div class="section">
               
                 <h1 id="logger-mongodb_watchdog">Logger: <code>mongodb_watchdog</code></h1>
-<p>The <code>mongodb_watchdog</code> module stores the watchdog entries for your Drupal site in MongoDB collection as mentioned in <a href="../../../install#settings-configuration">Settings Configuration</a></p>
-<p>This module uses a separate database, using the <code>logger</code> database alias in settings. Do NOT point that alias to the same database as <code>default</code>, because the module drops the <code>logger</code> database when uninstalling, which would drop all your other data with it.</p>
+<p>The <code>mongodb_watchdog</code> module stores the log entries for your Drupal site
+in MongoDB collections as mentioned in
+<a href="../../../install#settings-configuration">Settings Configuration</a></p>
+<p>This module uses a separate database, defined by the <code>logger</code> database alias in
+settings. Do NOT point that alias to the same database as <code>default</code>, because the
+module Drops the <code>logger</code> database when uninstalling, which would drop all your
+other data with it.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Below are the configurable items available in <code>mongodb_watchdog.settings</code></p>
 <ul>
-<li>
-<p><code>mongodb.watchdog.items</code></p>
-<ul>
+<li><code>mongodb.watchdog.items</code><ul>
 <li>the maximum item limit on the capped collection used by the module.</li>
 <li>if not defined, it defaults to 10000.</li>
-<li>the actual (size-based) limit is derived from this variable, assuming 1 <a href="https://en.wikipedia.org/wiki/Kibibyte">kiB</a> per watchdog entry.</li>
+<li>the actual (size-based) limit is derived from this value, assuming
+  1&nbsp;<a href="https://en.wikipedia.org/wiki/Kibibyte">kiB</a> per watchdog entry.</li>
 </ul>
 </li>
-<li>
-<p><code>mongodb.watchdog.limit</code></p>
-<ul>
-<li>the maximum severity level (0 to 7, per RFC 5424) to save into watchdog.</li>
-<li>Errors below this level (with a higher numerical level) will be ignored by the module.</li>
-<li>If not defined, all events will saved.</li>
+<li><code>mongodb.watchdog.limit</code><ul>
+<li>the maximum severity level (0 to 7, per RFC 5424) to save into the logger
+  storage.</li>
+<li>events below this level (with a higher numerical level) will be ignored by
+  the module.</li>
+<li>if not defined, all events will saved.</li>
 </ul>
 </li>
-<li>
-<p><code>mongodb.watchdog.items_per_page</code></p>
-<ul>
+<li><code>mongodb.watchdog.items_per_page</code><ul>
 <li>the maximum number of events displayed on the event details page.</li>
 </ul>
 </li>
-<li>
-<p><code>mongodb_watchdog.request_tracking</code></p>
-<ul>
+<li><code>mongodb_watchdog.request_tracking</code><ul>
 <li>if true, enable the per-request event tracking.</li>
-<li>if not defined, it defaults to false because its cost is not entirely negligible.</li>
-<li>this feature requires the use of mod_unique_id in Apache 2.x</li>
+<li>if not defined, it defaults to false because its cost is not entirely
+  negligible.</li>
+<li>this feature requires the use of <code>mod_unique_id</code> in Apache 2.x</li>
 </ul>
 </li>
-<li>
-<p><code>mongodb_watchdog.requests</code></p>
-<ul>
-<li>if request tracking is enabled, this setting defined the maximum requests limit on the capped collection used by the module.</li>
+<li><code>mongodb_watchdog.requests</code><ul>
+<li>if request tracking is enabled, this setting defines the maximum requests
+  limit on the capped collection used by the module.</li>
 <li>if not defined, it defaults to 100000.</li>
-<li>the actual (size-based) limit is derived from this variable, assuming 1 <a href="https://en.wikipedia.org/wiki/Kibibyte">kiB</a> per tracker entry.</li>
+<li>the actual (size-based) limit is derived from this variable, assuming
+  1&nbsp;<a href="https://en.wikipedia.org/wiki/Kibibyte">kiB</a> per tracker entry.</li>
 </ul>
 </li>
 </ul>
-<p>See <code>Drupal\Core\Logger\RfcLogLevel</code> and <code>Psr\Log\LogLevel</code> for further information about severity levels.</p>
+<p>See <code>Drupal\Core\Logger\RfcLogLevel</code> and <code>Psr\Log\LogLevel</code> for further
+information about severity levels.</p>
               
             </div>
           </div>
@@ -211,7 +224,7 @@
         <a href="../../bespoke/" class="btn btn-neutral float-right" title="Bespoke code">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../mongodb_storage/" class="btn btn-neutral" title="Key-value: `mongodb_storage`"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../mongodb_storage/" class="btn btn-neutral" title="Key-value: mongodb_storage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

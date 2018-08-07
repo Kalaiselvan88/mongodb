@@ -8,7 +8,7 @@
   
   
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>Driver: `mongodb` - MongoDB for Drupal</title>
+  <title>Driver: mongodb - MongoDB for Drupal</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -17,7 +17,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Driver: `mongodb`";
+    var mkdocs_page_name = "Driver: mongodb";
     var mkdocs_page_input_path = "modules/mongodb.md";
     var mkdocs_page_url = "/modules/mongodb/";
   </script>
@@ -61,13 +61,20 @@
 <li>
           
             <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../../layout/">Layout</a>
+        
+    </li>
+<li>
+          
+            <li>
     <ul class="subnav">
     <li><span>Modules</span></li>
 
         
             
     <li class="toctree-l1 current">
-        <a class="current" href="./">Driver: `mongodb`</a>
+        <a class="current" href="./">Driver: mongodb</a>
         
             <ul>
             
@@ -85,14 +92,14 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../mongodb_storage/">Key-value: `mongodb_storage`</a>
+        <a class="" href="../mongodb_storage/">Key-value: mongodb_storage</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../mongodb_watchdog/">Logger: `mongodb_watchdog`</a>
+        <a class="" href="../mongodb_watchdog/">Logger: mongodb_watchdog</a>
         
     </li>
 
@@ -148,7 +155,7 @@
         
       
     
-    <li>Driver: `mongodb`</li>
+    <li>Driver: mongodb</li>
     <li class="wy-breadcrumbs-aside">
       
         <a href="https://github.com/FGM/mongodb/edit/master/docs/modules/mongodb.md"
@@ -177,11 +184,11 @@ settings,</p>
 <ul>
 <li><code>Drupal\mongodb\DatabaseFactory</code> : This is the recommended entry point for
   most applications, returning a <code>MongoDb\Database</code> from a simple alias string.<ul>
-<li><code>__construct(ClientFactory $client_factory, Settings $settings)</code>. This is
+<li><code>__construct(ClientFactory $clientFactory, Settings $settings)</code>. This is
   normally invoked by the container, to which the class is exposed as
   <code>mongodb.database_factory</code>.</li>
-<li><code>get(string $alias): MongoDb\Database</code>; returns a <code>Database</code> instance
-  matching the value defined in Drupal settings for <code>$alias</code>.</li>
+<li><code>get(string $dbAlias): MongoDb\Database</code>; returns a <code>Database</code> instance
+  matching the value defined in Drupal settings for <code>$dbAlias</code>.</li>
 </ul>
 </li>
 <li><code>Drupal\mongodb\ClientFactory</code>: This one may be needed for more complex
@@ -195,8 +202,8 @@ settings,</p>
 </li>
 </ul>
 <h2 id="test-base-class">Test base class</h2>
-<p>The module provides a <code>\Drupal\mongodb\Tests\MongoDbTestBase</code> extending core
-class <code>KernelTestBase</code>. This allows modules to define their own integration
+<p>The module provides a <code>\Drupal\Tests\mongodb\Kernel\MongoDbTestBase</code> extending
+core class <code>KernelTestBase</code>. This allows modules to define their own integration
 tests using the module services, and taking advantage of running in a per-test
 database. What it actually provides:</p>
 <ul>
@@ -220,23 +227,29 @@ during test teardown.</li>
 </ul>
 </li>
 <li>Modules:<ul>
-<li>The test base enabled the <code>mongodb</code> modules, since all modules using MongoDB
-are expected to depend on it.</li>
-<li>Module tests will typically want their own module enabled, so they will need
-to add to <code>static::$modules</code> instead of redefining it, to avoid losing the
-<code>mongodb</code> module.</li>
+<li>The test base enabled the <code>mongodb</code> modules, since all modules using
+  MongoDB are expected to depend on it.</li>
+<li>Module tests will typically want their own module enabled, so they will
+  need to add to <code>static::$modules</code> instead of redefining it, to avoid
+  losing the <code>mongodb</code> module.</li>
 </ul>
 </li>
 <li><code>setUp()</code> / <code>tearDown()</code>:<ul>
-<li>Tests need to invoke <code>parent::setUp()</code> near the top of their own <code>setUp()</code>,
-  to have the test base define the properties before doing their own work.</li>
+<li>Tests need to invoke <code>parent::setUp()</code> near the top of their own
+  <code>setUp()</code>, to have the test base define the properties before doing their
+  own work.</li>
 <li>Tests need to invoke <code>parent::tearDown()</code> near the end of their own
   <code>tearDown()</code> - if any - to drop the default test database.</li>
-<li>Tests needing non-default test databases need to extend <code>$this-&gt;settings</code>
-  to add their own database alias after invoking <code>parent::setUp()</code>, and need
-  to drop that database during their own <code>tearDown()</code>. They can use
-  <code>$this-&gt;getTestDatabaseName($postfix)</code> method to build a per-test
-  database name that will not collide with the default database.</li>
+<li>Tests needing non-default test databases need to override the
+  <code>getSettingsArray()</code> function to add their own database alias after
+  invoking <code>parent::setUp()</code>, and need to drop that database during their
+  own <code>tearDown()</code>.<ul>
+<li>They can use <code>$this-&gt;getTestDatabaseName($postfix)</code> method to build a
+  per-test database name that will not collide with the default 
+  database.</li>
+<li>There are examples for this in the <code>mongodb_watchdoig</code> tests.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -249,10 +262,10 @@ to add to <code>static::$modules</code> instead of redefining it, to avoid losin
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../mongodb_storage/" class="btn btn-neutral float-right" title="Key-value: `mongodb_storage`">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../mongodb_storage/" class="btn btn-neutral float-right" title="Key-value: mongodb_storage">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../../install/" class="btn btn-neutral" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../../layout/" class="btn btn-neutral" title="Layout"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -280,7 +293,7 @@ to add to <code>static::$modules</code> instead of redefining it, to avoid losin
           <a href="https://github.com/FGM/mongodb" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../../install/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../../layout/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../mongodb_storage/" style="color: #fcfcfc">Next &raquo;</a></span>

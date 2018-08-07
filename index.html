@@ -56,8 +56,6 @@
                 
                     <li><a class="toctree-l4" href="#modules">Modules</a></li>
                 
-                    <li><a class="toctree-l4" href="#project-layout">Project layout</a></li>
-                
                     <li><a class="toctree-l4" href="#legal-information">Legal information</a></li>
                 
             
@@ -74,27 +72,34 @@
 <li>
           
             <li>
+    <li class="toctree-l1 ">
+        <a class="" href="layout/">Layout</a>
+        
+    </li>
+<li>
+          
+            <li>
     <ul class="subnav">
     <li><span>Modules</span></li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="modules/mongodb/">Driver: `mongodb`</a>
+        <a class="" href="modules/mongodb/">Driver: mongodb</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="modules/mongodb_storage/">Key-value: `mongodb_storage`</a>
+        <a class="" href="modules/mongodb_storage/">Key-value: mongodb_storage</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="modules/mongodb_watchdog/">Logger: `mongodb_watchdog`</a>
+        <a class="" href="modules/mongodb_watchdog/">Logger: mongodb_watchdog</a>
         
     </li>
 
@@ -161,13 +166,13 @@
               
                 <h1 id="mongodb-suite-for-drupal">MongoDB&reg; suite for Drupal&reg;</h1>
 <p>The MongoDB suite for Drupal 8 is a set of modules enabling the storage of
-various types of data on a Drupal site in mongodb.
-This is a addition to the standard SQL storage used by Drupal.</p>
+various types of data on a Drupal site in MongoDB. This comes in addition to the
+standard SQL storage used by Drupal.</p>
 <p>It comprises several Drupal modules, each implementing a specific functionality.
 With the exception of the base <code>mongodb</code> module, upon which all others depend
 because it provides the standardized connection service to Drupal, all the
 modules are independent of each other except where indicated.</p>
-<p>The <code>mongodb</code> module is not just the basis for this package, but also is
+<p>The <code>mongodb</code> module is not just the basis for this package, but is also
 designed to ease the development of bespoke code for end-user projects,
 providing Drupal-integrated Symfony services for Client and Database with a
 familiar alias-based selection, like the SQL database drivers do.</p>
@@ -185,7 +190,7 @@ familiar alias-based selection, like the SQL database drivers do.</p>
 <tr>
 <td><a href="./modules/mongodb">mongodb</a></td>
 <td>driver</td>
-<td>MongoDB Client and Database services, <a href="./tests">tests</a> base</td>
+<td>Client and Database services, <a href="./tests">tests</a> base</td>
 </tr>
 <tr>
 <td><a href="./modules/mongodb_storage">mongodb_storage</a></td>
@@ -200,8 +205,37 @@ familiar alias-based selection, like the SQL database drivers do.</p>
 </tbody>
 </table>
 <h3 id="planned">Planned</h3>
-<p>These modules have no direct equivalent in earlier versions, but their
-development is being considered.</p>
+<p>Modules expected to be ported to 8.x-2.x in some release after 2.0 include:</p>
+<p><code>mongodb_cache</code> module</p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>In a word</th>
+<th>Information</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mongodb_cache</td>
+<td>cache</td>
+<td>Cache storage, with server-side expiration</td>
+</tr>
+<tr>
+<td>mongodb_lock</td>
+<td>lock</td>
+<td>Lock plugin</td>
+</tr>
+<tr>
+<td>mongodb_path</td>
+<td>path</td>
+<td>Path plugin</td>
+</tr>
+</tbody>
+</table>
+<h3 id="future-directions">Future directions</h3>
+<p>This module has no direct equivalent in earlier versions, but its development
+is being considered.</p>
 <table>
 <thead>
 <tr>
@@ -212,19 +246,17 @@ development is being considered.</p>
 <tbody>
 <tr>
 <td><code>mongodb_debug</code></td>
-<td>Provide low-level debug information. A D7 version exists on <a href="https://github.com/FGM/mongodb_logger/">mongodb_logger</a> but depends on the legacy <code>mongo</code> PHP extension. Futures versions will need the 1.4 version of the <code>mongodb</code> extension which implements the MongoDB APM specification.</td>
+<td>Provides low-level debug information.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<p>A D7 version exists on <a href="https://github.com/FGM/mongodb_logger/">mongodb_logger</a> but depends on the legacy <code>mongo</code> PHP
+extension. Futures versions will need the 1.4 version of the <code>mongodb</code> extension
+which implements the MongoDB APM specification.</p>
 <h2 id="legal-information">Legal information</h2>
 <ul>
-<li>This suite of modules is licensed under the General Public License, v2.0 or later (GPL-2.0-or-later).</li>
+<li>This suite of modules is licensed under the General Public License,
+  v2.0 or later (GPL-2.0-or-later).</li>
 <li>MongoDB is a registered trademark of MongoDB Inc.</li>
 <li>Drupal is a registered trademark of Dries Buytaert.</li>
 </ul>
@@ -276,5 +308,5 @@ docs/
 
 <!--
 MkDocs version : 0.16.1
-Build Date UTC : 2018-07-22 20:25:26
+Build Date UTC : 2018-08-07 18:31:50
 -->

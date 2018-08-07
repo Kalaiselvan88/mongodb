@@ -65,10 +65,17 @@
                 
                     <li><a class="toctree-l4" href="#settings-configuration">Settings Configuration</a></li>
                 
-                    <li><a class="toctree-l4" href="#installation">Installation</a></li>
+                    <li><a class="toctree-l4" href="#installing-using-composer">Installing using Composer</a></li>
                 
             
             </ul>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../layout/">Layout</a>
         
     </li>
 <li>
@@ -80,21 +87,21 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../modules/mongodb/">Driver: `mongodb`</a>
+        <a class="" href="../modules/mongodb/">Driver: mongodb</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../modules/mongodb_storage/">Key-value: `mongodb_storage`</a>
+        <a class="" href="../modules/mongodb_storage/">Key-value: mongodb_storage</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../modules/mongodb_watchdog/">Logger: `mongodb_watchdog`</a>
+        <a class="" href="../modules/mongodb_watchdog/">Logger: mongodb_watchdog</a>
         
     </li>
 
@@ -164,36 +171,42 @@
 <p>The MongoDB module and sub-modules need some configuration to be useful. This
 guide assumes that :</p>
 <ul>
-<li>a <a href="https://www.mongodb.org/downloads">MongoDB</a> 3.0 to 4.0 server instance is already installed, configured, and
-  available to connect to from the Drupal instance.</li>
-<li>the site will be running <a href="https://www.drupal.org/project/drupal">Drupal</a> 8.[56].x, with <a href="https://www.drupal.org/project/drush">Drush</a> 8.x.</li>
+<li>a <a href="https://www.mongodb.org/downloads">MongoDB</a> 3.0 to 4.0 server instance is already installed,
+  configured and available for connection from the Drupal instance.</li>
+<li>the site will be running <a href="https://www.drupal.org/project/drupal">Drupal</a> 8.[56].x, with <a href="https://www.drupal.org/project/drush">Drush</a> 
+  8.x<sup id="fnref:1"><a class="footnote-ref" href="#fn:1" rel="footnote">1</a></sup>.</li>
 <li>the <a href="http://php.net/mongodb">mongodb</a> (not <a href="http://php.net/mongo">mongo</a>) PHP extension version 1.1.7 or
   later is installed and configured.</li>
-<li>PHP is version 7.[01].x. At this point, <a href="https://www.drupal.org/node/2936045">PHP 7.2.x</a> might not pass the
-  test suite. It should be compatible by the time Drupal 8.6.0 is released.</li>
+<li>
+<p>PHP is version 7.0.x to 7.2.x.</p>
+</li>
+<li>
+<p>We recommend <a href="#installing-using-composer">using Composer</a> for installing this
+  module.</p>
+</li>
 </ul>
-<p><strong>NOTE</strong> : There is a plan to support Drush 9.x and it can be tracked <a href="https://www.drupal.org/project/mongodb/issues/2986785">here</a></p>
-<p>In a nutshell, any MongoDB server &gt;=3.6, PHP extension &gt;= 1.3.4, MongoDB PHP library &gt;= 1.2.0 and PHP version &gt;= 7.1. We recommend using composer for installing this module. For details refer <a href="#composer-requirements">below</a>.</p>
-<p>For more details about MongoDB extension and library for PHP check <a href="http://php.net/mongodb">here</a></p>
-<p>Some more links for you:</p>
+<p>Check out the <a href="http://php.net/mongodb">MongoDB extension and library for PHP</a></p>
+<p>Installing MongoDB itself is best explained in these official resources
+maintained by MongoDB Inc.:</p>
 <ul>
 <li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/">MongoDB Mac installation</a></li>
 <li><a href="https://docs.mongodb.com/manual/administration/install-on-linux/">MongoDB LINUX installation</a></li>
 <li><a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/">MongoDB Windows installation</a></li>
 </ul>
-<p>If MongoDB 3.0 to 4.0 is installed on <code>localhost:27017</code> and <code>mongod</code> was started
-with the <code>–httpinterface</code> option, you may view the web admin interface:</p>
+<p>If MongoDB 3.0 to 3.5<sup id="fnref:2"><a class="footnote-ref" href="#fn:2" rel="footnote">2</a></sup> is installed on <code>localhost:27017</code> and the <code>mongod</code>
+server was started with the <code>–httpinterface</code> option, you may view the web admin
+interface:</p>
 <pre><code>http://localhost:28017/
 </code></pre>
 <h2 id="settings-configuration">Settings Configuration</h2>
 <ul>
-<li>Download the module package, as per
+<li>Download the module package, as per 
   <a href="https://www.drupal.org/documentation/install/modules-themes/modules-8">Installing contributed modules (Drupal 8)</a></li>
 <li>Copy the relevant section from the <code>mongodb/example.settings.local.php</code> to
   your <code>settings.local.php</code> file if you use one, or <code>settings.php</code> otherwise,
   and adapt it to match your MongoDB settings. These settings are used by the
   <code>mongodb</code> module to connect to your MongoDB servers, with the <code>default</code> server
-   being the one started in previous steps.</li>
+  being the one started in previous steps.</li>
 <li>The <code>clients</code> key contains an associative array of connection by
     connection alias, with the default connection parameters being under the
     <code>default</code> key, and additional keys allowing the use of other
@@ -235,49 +248,15 @@ $settings['mongodb'] = [
   <code>default</code> MongoDB server, but in a separate <code>logger</code> database.</li>
 </ul>
 </li>
-<li>To use the MongoDB Key-Value (Expirable) storage:<ul>
-<li>ensure there is a <code>keyvalue</code> database alias in <code>settings.local.php</code>, like
-in the previous lines.</li>
-<li>declare MongoDB as the default keyvalue storage implementation by editing
-the existing declarations in the <code>sites/default/services.yml</code> file:</li>
-</ul>
-</li>
-</ul>
-<pre><code class="yaml"># In sites/default/services.yml.
-factory.keyvalue:
-  default: keyvalue.mongodb
-factory.keyvalue.expirable:
-  keyvalue_expirable_default: keyvalue.expirable.mongodb
-</code></pre>
-
-<h2 id="installation">Installation</h2>
-<ul>
-<li>Enable the <code>mongodb_storage</code> module, e.g. using <code>drush en mongodb_storage</code>.</li>
-<li>Import the existing Key-Value contents from the database, using the Drush
-    <code>mongodb_storage-import-keyvalue</code> command: <code>drush most-ikv</code>. It will output
-    the list of imported keys, for your information, like:</li>
-</ul>
-<pre><code class="yaml">key_value
-  config.entity.key_store.action
-    uuid:054e62b3-1c40-4f22-aa17-c092bd796ee8
-    uuid:0cfd15f5-c01a-4912-991c-ad10e934f86e
-(...lots of line, then...)
-key_value_expire
-  update_available_releases
-    drupal
-</code></pre>
-
-<ul>
-<li>rebuild the container to take these changes into account using <code>drush cr</code>.</li>
 </ul>
 <p>Once the module is installed and enabled, you can check its requirements on
 <code>/admin/reports/status</code>:</p>
 <p><img alt="MongoDB on status page" src="../images/mongodb-requirements.png" /></p>
-<h3 id="composer-requirements">Composer Requirements</h3>
+<h2 id="installing-using-composer">Installing using Composer</h2>
 <ul>
 <li>
-<p>This section is applicable if you are using composer already in your site to
-  manage module dependencies. Know more about composer <a href="https://www.drupal.org/docs/develop/using-composer/using-composer-to-manage-drupal-site-dependencies">here</a>.</p>
+<p>This section is applicable if you are already using <a href="https://www.drupal.org/docs/develop/using-composer/using-composer-to-manage-drupal-site-dependencies">Composer</a> in
+your site to manage module dependencies.</p>
 </li>
 <li>
 <p>At the root of your site</p>
@@ -292,10 +271,6 @@ key_value_expire
 <p><code>composer require drupal/mongodb "^2.0.0"</code>
 <code>composer require mongodb/mongodb "^1.2.0"</code></p>
 </li>
-<li>
-<p>If this is the first Composer dependency on the project, run:</p>
-<p><code>composer install</code></p>
-</li>
 </ul>
 </li>
 <li>
@@ -303,12 +278,36 @@ key_value_expire
   Drush commands for the <code>mongodb</code> module.</p>
 </li>
 </ul>
-<p>Note that there is currently a bug with Composer-based deployment from packages.drupal.org/8 : <a href="https://www.drupal.org/project/project_composer/issues/2985860">#2985860: packages.drupal.org/8 serves incorrect composer.json for module mongodb</a>. The workaround is:</p>
+<p>Note that there is currently a bug with Composer-based deployment from
+packages.drupal.org/8 :
+<a href="https://www.drupal.org/project/project_composer/issues/2985860">#2985860: packages.drupal.org/8 serves incorrect composer.json for module mongodb</a>.</p>
+<p>The workaround is:</p>
 <ul>
-<li>Either require mongodb/mongodb directly in the root composer.json of the project</li>
-<li>Add a repositories entry with <code>"type": "vcs"</code> and <code>"url": "https://github.com/fgm/mongodb.git"</code> in the root <code>composer.json</code>, and require the <code>"drupal/mongodb":"dev-8.x-2.x"</code> instead of the d.o.-rewritten format for semantic versioning <code>"drupal/mongodb":"^2.0"</code></li>
+<li>either require <code>mongodb/mongodb</code> directly in the root <code>composer.json</code> of the
+  project,</li>
+<li>or add this JSON fragment in the root <code>composer.json</code> to fetch the code from
+  Github instead of Drupal:</li>
 </ul>
-<p>Once this issue is fixed, these workarounds will no longer be necessary.</p>
+<pre><code class="json">      &quot;repositories&quot;: {
+          &quot;type&quot;: &quot;vcs&quot;,
+          &quot;url&quot;: &quot;https://github.com/fgm/mongodb.git&quot;
+      },
+      &quot;require&quot;: {
+          &quot;drupal/mongodb&quot;:&quot;dev-8.x-2.x&quot;
+      }
+</code></pre>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>There is a <a href="https://www.drupal.org/project/mongodb/issues/2986785">plan</a> to support Drush 9.x.&#160;<a class="footnote-backref" href="#fnref:1" rev="footnote" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>This option is <a href="https://docs.mongodb.com/manual/release-notes/3.6-compatibility/#http-interface-and-rest-api">deprecated from 3.6 version</a>.&#160;<a class="footnote-backref" href="#fnref:2" rev="footnote" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
               
             </div>
           </div>
@@ -316,7 +315,7 @@ key_value_expire
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../modules/mongodb/" class="btn btn-neutral float-right" title="Driver: `mongodb`">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../layout/" class="btn btn-neutral float-right" title="Layout">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href=".." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -350,7 +349,7 @@ key_value_expire
         <span><a href=".." style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../modules/mongodb/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../layout/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
