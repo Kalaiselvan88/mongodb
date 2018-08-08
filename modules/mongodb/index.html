@@ -227,11 +227,12 @@ during test teardown.</li>
 </ul>
 </li>
 <li>Modules:<ul>
-<li>The test base enabled the <code>mongodb</code> modules, since all modules using
-  MongoDB are expected to depend on it.</li>
-<li>Module tests will typically want their own module enabled, so they will
-  need to add to <code>static::$modules</code> instead of redefining it, to avoid
-  losing the <code>mongodb</code> module.</li>
+<li>The test base enabled the <code>mongodb</code> modules, since all modules using MongoDB
+  are expected to depend on it.</li>
+<li>Module tests will typically want their own module enabled, so they will need
+  to redefine <code>static::$modules</code> including the <code>mongodb</code> module as done in
+  <code>Drupal\Tests\mongodb_storage\Kernel\KeyValueTestBase</code> and
+  <code>Drupal\Tests\mongodb_watchdog\Kernel\LoggerTest</code>.</li>
 </ul>
 </li>
 <li><code>setUp()</code> / <code>tearDown()</code>:<ul>
